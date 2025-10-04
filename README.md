@@ -6,7 +6,7 @@ It is built with plain HTML, CSS, and JavaScript, making it lightweight, fast, a
 
 ## Live Demo
 
-[**Play the game here!**](https://your-github-username.github.io/learning-games/) 👈 *(Remember to replace `your-github-username` with your actual GitHub username!)*
+**Play the game here!** 👈
 
 ## Features
 
@@ -33,7 +33,7 @@ Since this is a client-side application with no server-side dependencies, runnin
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-github-username/learning-games.git
+    git clone https://github.com/kpiyushgupta895/learning-games.git
     ```
 
 2.  **Navigate to the directory:**
