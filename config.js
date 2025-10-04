@@ -221,7 +221,7 @@ const MASTER_CONFIG = [
     { name: 'skateboard', emoji: '🛹', category: 'sport' },
     { name: 'ski',        emoji: '🎿', category: 'sport' },
     { name: 'soccer ball',emoji: '⚽', category: 'sport', color: 'white' },
-    { name: 'tennis',     emoji: '🎾', category: 'sport', color: 'yellow' },
+    { name: 'tennis',     emoji: '🎾', category: 'sport', },
     { name: 'volleyball', emoji: '🏐', category: 'sport' },
     { name: 'yo-yo',      emoji: '🪀', category: 'activity' },
 
