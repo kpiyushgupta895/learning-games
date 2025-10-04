@@ -1,0 +1,285 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* General Body Styles */
+body {
+    font-family: sans-serif; /* UPDATED */
+    background: #f0f9ff;
+    color: #333;
+    text-align: center;
+    overscroll-behavior-y: contain;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #ff6347;
+    font-size: 3rem;
+    text-shadow: 2px 2px #fdfd96;
+}
+
+/* Game Container */
+#game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 20px 40px; /* Re-added padding for internal spacing */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Needed for absolute positioning of palette if desired */
+}
+
+#game-container h2 {
+    font-size: 1.8rem;
+    color: #0077b6;
+    margin-top: 0;
+}
+
+/* Game Areas */
+.game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 4rem;
+    margin: 20px 0;
+    line-height: 1;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Generic Option Button Style */
+.option {
+    padding: 15px 25px;
+    font-size: 2rem;
+    font-family: sans-serif; /* UPDATED */
+    border: 4px solid #ade8f4;
+    border-radius: 15px;
+    background-color: #caf0f8;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    min-width: 80px;
+}
+
+.option:hover {
+    transform: translateY(-5px);
+    background-color: #90e0ef;
+}
+
+/* Feedback and State Styles */
+.option.correct {
+    background-color: #90ee90;
+    border-color: #2e8b57;
+    animation: pulse 0.5s;
+}
+
+.option.incorrect {
+    background-color: #ffcccb;
+    border-color: #dc143c;
+    animation: shake 0.5s;
+}
+
+#feedback {
+    font-size: 2rem;
+    font-weight: bold;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#feedback.correct { color: #2e8b57; }
+#feedback.incorrect { color: #dc143c; }
+
+/* Next Button */
+#next-button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-family: sans-serif; /* UPDATED */
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    background-color: #ff6347;
+    color: white;
+    box-shadow: 0 5px #d94f3a;
+    transition: all 0.1s ease-in-out;
+}
+
+#next-button:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 #d94f3a;
+}
+
+.hidden { display: none !important; }
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* --- Emoji Tooltip --- */
+#emoji-tooltip {
+    position: fixed; /* Use fixed to position relative to the viewport */
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: sans-serif;
+    z-index: 1000;
+    pointer-events: none; /* So it doesn't interfere with other clicks */
+    opacity: 0;
+    transform: translate(-50%, -110%); /* Position above the cursor/touch point */
+    transition: opacity 0.2s ease;
+}
+
+#emoji-tooltip.visible {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* --- Alphabet Match Game Styles --- */
+#match-game-wrapper {
+    position: relative;
+    display: flex; /* Establishes flex container */
+    justify-content: space-between; /* Pushes columns to edges (left/right in portrait) */
+    width: 100%;
+    /* Removed max-width to allow filling game-container */
+    margin: 0 auto;
+    /* Removed gap here as space-between handles distribution */
+    flex-grow: 1; /* Allow this wrapper to fill the available vertical space */
+}
+
+.match-column {
+    width: 45%; /* Adjusted width to allow space-between to distribute remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.match-item {
+    background: #fff;
+    border: 4px solid #ade8f4;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    flex-grow: 1; /* Allow items to grow and fill the column space */
+}
+
+.match-item.letter {
+    font-size: 3.5rem;
+    color: #e63946;
+}
+
+.match-item.image {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+.match-item.color {
+    padding: 0; /* Remove padding to let swatch fill the space */
+}
+
+.match-item.selected {
+    border-color: #f77f00;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #f77f00aa;
+}
+
+.match-item.matched {
+    border-color: #2a9d8f;
+    background-color: #e9f5f3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* --- Responsive Orientation Styles --- */
+@media (orientation: landscape) {
+    #match-game-wrapper {
+        flex-direction: column; /* Columns stack vertically in landscape */
+        justify-content: space-between; /* Pushes columns to top/bottom in landscape */
+        max-width: 90vw; /* Use more width in landscape */
+    }
+    .match-column {
+        width: 100%; /* Columns take full width */
+        flex-direction: row; /* Items within columns go side-by-side */
+        justify-content: space-around; /* Distribute items */
+        gap: 15px; /* Space between items */
+    }
+    .match-item {
+        flex: 1;
+        max-width: 150px;
+        aspect-ratio: 1 / 1; /* Ensure all items are square */
+    }
+}
+
+.color-box {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #eee;
+    border-radius: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* --- Color Game Specific Styles --- */
+.color-options .color-option-wrapper {
+    /* Reset base option styles for a clean wrapper */
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 90px; /* Ensure enough space for swatch and name */
+}
+
+/* Swatch for the "Color Recognition" game (the multiple choice one) */
+.color-options .color-swatch {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: border-color 0.2s ease;
+}
+
+/* Swatch for the "Match the Colour" game */
+.match-item .color-swatch {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px; /* Match the parent's border-radius */
+    border-width: 0; /* No inner border needed for match game */
+    box-shadow: none;
+}
+
+.color-option-wrapper .color-name {
+    font-size: 1.2rem;
+    color: #333; /* Dark text for readability on light background */
+}
+
+.color-options .color-option-wrapper.correct .color-swatch {
+    border-color: #2e8b57; /* Highlight the swatch border on correct answer */
+}
