@@ -232,7 +232,7 @@ const MASTER_CONFIG = [
     { name: 'hat',        emoji: '👒', category: 'clothing' },
     { name: 'jeans',      emoji: '👖', category: 'clothing', color: 'blue' },
     { name: 'scarf',      emoji: '🧣', category: 'clothing' },
-    { name: 'shirt',      emoji: '👕', category: 'clothing', color: 'blue' },
+    { name: 'shirt',      emoji: '👕', category: 'clothing', color: 'green' },
     { name: 'shoe',       emoji: '👟', category: 'clothing' },
     { name: 'sock',       emoji: '🧦', category: 'clothing' },
     
