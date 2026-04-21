@@ -164,6 +164,35 @@ h1 {
     margin: 0 auto;
     /* Removed gap here as space-between handles distribution */
     flex-grow: 1; /* Allow this wrapper to fill the available vertical space */
+    touch-action: none;
+}
+
+.match-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.match-line {
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.match-line.correct {
+    stroke: #2a9d8f;
+}
+
+.match-line.incorrect {
+    stroke: #dc143c;
+}
+
+.match-line.preview {
+    stroke: #0077b6;
+    stroke-width: 6;
+    stroke-dasharray: 10 8;
 }
 
 .match-column {
@@ -184,6 +213,7 @@ h1 {
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
+    z-index: 2;
     flex-grow: 1; /* Allow items to grow and fill the column space */
 }
 
